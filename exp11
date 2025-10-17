@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+class
+class BankAccount {
+protected:
+    int account_number;
+    double balance;
+
+public:
+    void inputAccount() {
+        cout << "Enter account number: ";
+        cin >> account_number;
+        cout << "Enter balance: ";
+        cin >> balance;
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        cout << "Deposited: Rs." << amount << endl;
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawn: Rs." << amount << endl;
+        } else {
+            cout << "Insufficient balance!" << endl;
+        }
+    }
+
+    void displayBalance() {
+        cout << "Account Number: " << account_number << endl;
+        cout << "Balance: Rs." << balance << endl;
+    }
+};
+
+
+class SavingsAccount : public BankAccount {
+private:
+    double rate_of_interest;
+
+public:
+    void inputSavings() {
+        cout << "Enter rate of interest (%): ";
+        cin >> rate_of_interest;
+    }
+
+    void calculateInterest() {
+        double interest = balance * rate_of_interest / 100;
+        cout << "Interest: Rs." << interest << endl;
+    }
+};
+
+class CurrentAccount : public BankAccount {
+private:
+    double minimum_balance;
+    double service_charge;
+
+public:
+    void inputCurrent() {
+        cout << "Enter minimum balance required: ";
+        cin >> minimum_balance;
+        cout << "Enter service charge: ";
+        cin >> service_charge;
+    }
+
+    void calculateServiceCharge() {
+        if (balance < minimum_balance) {
+            balance -= service_charge;
+            cout << "Balance below minimum! Service charge Rs." << service_charge << " applied." << endl;
+        } else {
+            cout << "No service charge applied." << endl;
+        }
+    }
+};
+
+int main() {
+    cout << "--- Savings Account ---\n";
+    SavingsAccount s;
+    s.inputAccount();
+    s.inputSavings();
+    s.deposit(500);
+    s.withdraw(200);
+    s.displayBalance();
+    s.calculateInterest();
+
+    cout << "\n--- Current Account ---\n";
+    CurrentAccount c;
+    c.inputAccount();
+    c.inputCurrent();
+    c.deposit(1000);
+    c.withdraw(800);
+    c.calculateServiceCharge();
+    c.displayBalance();
+
+    return 0;
+}
