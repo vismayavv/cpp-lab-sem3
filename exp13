@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+ class
+class c_polygon {
+public:
+   
+    virtual float area() {
+        cout << "Area of polygon not defined." << endl;
+        return 0;
+    }
+};
+
+
+class c_rectangle : public c_polygon {
+private:
+    float length;
+    float width;
+
+public:
+    void setDimensions(float l, float w) {
+        length = l;
+        width = w;
+    }
+
+ 
+    float area() override {
+        return length * width;
+    }
+};
+
+
+class c_triangle : public c_polygon {
+private:
+    float base;
+    float height;
+
+public:
+    void setDimensions(float b, float h) {
+        base = b;
+        height = h;
+    }
+
+   
+    float area() override {
+        return 0.5 * base * height;
+    }
+};
+
+int main() {
+    c_polygon* poly; 
+
+ 
+    c_rectangle rect;
+    rect.setDimensions(10, 5);
+    poly = &rect;
+    cout << "Area of Rectangle: " << poly->area() << endl;
+
+
+    c_triangle tri;
+    tri.setDimensions(8, 6);
+    poly = &tri;
+    cout << "Area of Triangle: " << poly->area() << endl;
+
+    return 0;
+}
