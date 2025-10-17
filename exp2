@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    int BookID;
+    string BookName;
+    float BookPrice;
+
+  
+    float total_cost(int n) {
+        return BookPrice * n;
+    }
+
+public:
+    
+    void inputDetails() {
+        cout << "Enter Book ID: ";
+        cin >> BookID;
+        cout << "Enter Book Name: ";
+        cin.ignore(); 
+        getline(cin, BookName);
+        cout << "Enter Book Price: ";
+        cin >> BookPrice;
+    }
+
+    
+    void displayDetails() {
+        cout << "\nBook ID: " << BookID;
+        cout << "\nBook Name: " << BookName;
+        cout << "\nBook Price: Rs." << BookPrice << endl;
+    }
+
+    
+    void purchase() {
+        int n;
+        cout << "Enter number of copies required: ";
+        cin >> n;
+        cout << "Total cost to be paid: Rs." << total_cost(n) << endl;
+    }
+};
+
+int main() {
+    Book b1, b2, b3;
+
+    cout << "Enter details for Book 1:\n";
+    b1.inputDetails();
+
+    cout << "\nEnter details for Book 2:\n";
+    b2.inputDetails();
+
+    cout << "\nEnter details for Book 3:\n";
+    b3.inputDetails();
+
+    cout << "\n--- Displaying Book Details and Total Cost ---\n";
+
+    cout << "\nDetails for Book 1:";
+    b1.displayDetails();
+    b1.purchase();
+
+    cout << "\nDetails for Book 2:";
+    b2.displayDetails();
+    b2.purchase();
+
+    cout << "\nDetails for Book 3:";
+    b3.displayDetails();
+    b3.purchase();
+
+    return 0;
+}
